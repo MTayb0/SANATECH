@@ -19,9 +19,8 @@
     
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* Blog Specific Styles */
+        <style>
+        /* ==================== CSS VARIABLES ==================== */
         :root {
             --primary: #0a192f;
             --secondary: #020c1b;
@@ -34,6 +33,7 @@
             --warning: #ffbb33;
         }
 
+        /* ==================== BASE STYLES ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -46,7 +46,7 @@
             color: var(--text-light);
             line-height: 1.6;
         }
-
+                    /* ==================== HERO SECTION ==================== */
         .blog-hero {
             height: 40vh;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -75,34 +75,7 @@
             margin: 0 auto;
             padding: 2rem;
         }
-        
-        /* Admin Panel */
-        .admin-panel {
-            background: linear-gradient(135deg, #1a2a3a, #0a1a2a);
-            border: 2px solid var(--neon-blue);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            display: none;
-        }
-        
-        .admin-panel.visible {
-            display: block;
-        }
-        
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .admin-title {
-            color: var(--neon-blue);
-            font-size: 1.5rem;
-        }
-        
-        /* Login Section */
+                    /* ==================== LOGIN SECTION ==================== */
         .login-section {
             background: rgba(10, 25, 47, 0.9);
             border: 2px solid var(--neon-blue);
@@ -157,8 +130,7 @@
             margin-bottom: 1rem;
             color: var(--neon-blue);
         }
-        
-        /* Write Blog Section */
+                    /* ==================== WRITE BLOG SECTION ==================== */
         .write-blog-section {
             background: rgba(10, 25, 47, 0.9);
             border: 2px solid var(--neon-blue);
@@ -254,8 +226,7 @@
             height: 25px;
             cursor: pointer;
         }
-        
-        /* Blog Posts */
+                    /* ==================== BLOG POSTS ==================== */
         .blog-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -360,8 +331,7 @@
         .full-content.visible {
             display: block;
         }
-        
-        /* Comments */
+                    /* ==================== COMMENTS SECTION ==================== */
         .comments-section {
             margin-top: 2rem;
             padding-top: 2rem;
@@ -404,9 +374,7 @@
             border: 1px solid rgba(0,255,255,0.2);
             border-radius: 5px;
             color: white;
-        }
-        
-        /* Sidebar */
+        }        /* ==================== SIDEBAR ==================== */
         .blog-sidebar {
             position: sticky;
             top: 100px;
@@ -491,8 +459,8 @@
             font-size: 0.8rem;
             color: var(--text-gray);
         }
-        
-        /* Lightbox */
+            
+                    /* ==================== LIGHTBOX ==================== */
         .lightbox {
             position: fixed;
             top: 0;
@@ -530,7 +498,7 @@
             cursor: pointer;
         }
         
-        /* Buttons */
+        /* ==================== BUTTONS ==================== */
         .btn-primary {
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             color: white;
@@ -571,7 +539,7 @@
             cursor: pointer;
         }
         
-        /* Loading */
+        /* ==================== LOADING SCREEN ==================== */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -585,6 +553,7 @@
             z-index: 9999;
         }
         
+        /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 768px) {
             .blog-hero h1 {
                 font-size: 2.5rem;
@@ -599,7 +568,7 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
+    <!-- ==================== LOADING SCREEN ==================== -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="circuit-loader">
@@ -611,8 +580,7 @@
             <h2 class="loading-text">LOADING BLOG</h2>
         </div>
     </div>
-
-    <!-- Navigation -->
+        <!-- ==================== NAVIGATION ==================== -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -634,30 +602,31 @@
             </div>
         </div>
     </nav>
-
-    <!-- Blog Hero -->
+    
+        <!-- ==================== BLOG HERO ==================== -->
     <section class="blog-hero">
         <div class="hero-content">
             <h1 class="animate__animated animate__fadeInUp">SanaTech <span>BLOG</span></h1>
             <p class="animate__animated animate__fadeInUp">Expert insights, DIY guides & industry news from Dubai</p>
         </div>
     </section>
-
-    <!-- Blog Content -->
+        <!-- ==================== MAIN BLOG CONTAINER ==================== -->
     <div class="blog-container">
-        <!-- Login Section -->
+                <!-- ==================== LOGIN SECTION ==================== -->
         <div class="login-section" id="loginSection">
             <div class="login-tabs">
                 <button class="login-tab active" onclick="switchLoginTab('login')">Login</button>
                 <button class="login-tab" onclick="switchLoginTab('register')">Register</button>
             </div>
             
+            <!-- Login Form -->
             <div id="loginForm" class="login-form">
                 <input type="text" id="loginName" placeholder="Your Name">
                 <input type="email" id="loginEmail" placeholder="Your Email">
                 <button class="btn-primary" onclick="loginUser()">Login / Continue</button>
             </div>
             
+            <!-- Registration Form -->
             <div id="registerForm" class="login-form" style="display: none;">
                 <input type="text" id="regName" placeholder="Your Name">
                 <input type="email" id="regEmail" placeholder="Your Email">
@@ -669,6 +638,7 @@
                 <button class="btn-primary" onclick="registerUser()">Register</button>
             </div>
             
+            <!-- Admin Recovery -->
             <div id="adminRecovery" style="display: none; margin-top: 1rem;">
                 <hr style="border-color: var(--neon-blue); margin: 1rem 0;">
                 <p>Admin Password Recovery:</p>
@@ -676,9 +646,135 @@
                 <button class="btn-secondary" onclick="recoverAdmin()">Recover Admin Access</button>
             </div>
         </div>
-
-        <!-- Write Blog Section (shown when logged in) -->
+        
+            <!-- ==================== WRITE BLOG SECTION ==================== -->
         <div class="write-blog-section" id="writeSection">
             <h2><i class="fas fa-pen-fancy"></i> Write a New Blog Post</h2>
             
             <input type="text" id="postTitle" class="blog-input" placeholder="Post Title *">
+            
+            <select id="postCategory" class="blog-select">
+                <option value="Electrical">Electrical</option>
+                <option value="Automation">Automation</option>
+                <option value="Handyman">Handyman</option>
+                <option value="Tiles">Tiles & Marble</option>
+                <option value="DEWA">DEWA Regulations</option>
+                <option value="DIY">DIY Guides</option>
+            </select>
+            
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <button class="tool-btn" onclick="insertImageTag()"><i class="fas fa-image"></i> Insert Image</button>
+                <button class="tool-btn" onclick="insertPDFTag()"><i class="fas fa-file-pdf"></i> Insert PDF</button>
+                <button class="tool-btn" onclick="insertYouTubeTag()"><i class="fab fa-youtube"></i> Insert YouTube</button>
+            </div>
+            
+            <!-- Content Area -->
+            <textarea id="postContent" class="blog-textarea" placeholder="Write your blog post... 
+Use [img]URL[/img] for images
+Use [pdf]URL[/pdf] for PDFs
+Use [yt]URL[/yt] for YouTube"></textarea>
+            
+            <!-- Media Preview -->
+            <div class="media-preview" id="mediaPreview"></div>
+            
+            <!-- SEO Fields -->
+            <input type="text" id="postMetaDesc" class="blog-input" placeholder="Meta Description (for Google search)">
+            <input type="text" id="postKeywords" class="blog-input" placeholder="Keywords (comma separated)">
+            
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-primary" onclick="publishPost()">
+                    <i class="fas fa-cloud-upload-alt"></i> Publish
+                </button>
+                <button class="btn-secondary" onclick="clearPostForm()">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+        </div>
+                <!-- ==================== BLOG LAYOUT ==================== -->
+        <div class="blog-layout">            <!-- ==================== MAIN CONTENT - BLOG POSTS ==================== -->
+            <div class="blog-main" id="blogMain">
+                <!-- Blog posts will be loaded here by JavaScript -->
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fas fa-spinner fa-spin fa-3x"></i>
+                    <p>Loading posts...</p>
+                </div>
+            </div>            <!-- ==================== SIDEBAR ==================== -->
+            <div class="blog-sidebar">
+                <!-- Search Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Search Posts</h3>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search...">
+                        <button class="btn-primary" onclick="searchPosts()"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Categories</h3>
+                    <ul class="category-list" id="categoryList"></ul>
+                </div>
+
+                <!-- Recent Posts Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Recent Posts</h3>
+                    <div id="recentPosts"></div>
+                </div>
+
+                <!-- Popular Tags Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Popular Tags</h3>
+                    <div id="popularTags" class="tags"></div>
+                </div>
+            </div>
+        </div> <!-- Close blog-layout -->
+    </div> <!-- Close blog-container -->
+    
+                <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <h2>Sana<span>Tech</span></h2>
+                </div>
+                <p>Professional electrical, automation, handyman, and finishing services across Dubai and UAE.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +971 50 930 4586</li>
+                    <li><i class="fas fa-envelope"></i> tayab.elec@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Dubai, UAE</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SanaTech. All Rights Reserved.</p>
+        </div>
+    </footer>
+        <!-- ==================== LIGHTBOX ==================== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="script.js"></script>
+    <script src="blog.js"></script>
+</body>
+</html>
+
+            
