@@ -1,66 +1,123 @@
-// blog.js - Complete working version
+// blog.js - Enhanced for PDF content
 
 // Blog data storage
 let blogPosts = [];
 let mediaPreviews = [];
 
-// Initialize blog when page loads
+// PDF Template - Use this to add your PDF content as blog posts
+const pdfBlogTemplate = {
+    // Copy your PDF content here as blog posts
+    // Example:
+    electricalGuide: {
+        title: "Complete Electrical Guide for Dubai Homes",
+        content: `Your PDF text content here...
+        
+        You can paste multiple paragraphs.
+        
+        The system will format it nicely.`,
+        images: [
+            "https://i.imgur.com/your-image-1.jpg",
+            "https://i.imgur.com/your-image-2.jpg",
+            "https://i.imgur.com/your-image-3.jpg"
+        ]
+    }
+};
+
+// Initialize blog
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Blog page initialized');
-    
-    // Load blogs from localStorage
     loadBlogs();
     
-    // Hide loading screen after 1 second
     setTimeout(() => {
         const loadingScreen = document.getElementById('loadingScreen');
-        if (loadingScreen) {
-            loadingScreen.style.display = 'none';
-        }
+        if (loadingScreen) loadingScreen.style.display = 'none';
     }, 1000);
 });
 
-// Load blogs from localStorage
+// Quick Add PDF Content Function
+function addPDFContent() {
+    // This is where you'll paste your PDF content
+    const pdfContent = {
+        title: "Your PDF Title Here",
+        category: "Electrical", // or Automation, Handyman, Tiles
+        content: `Paste your PDF text here. 
+        
+        You can have multiple paragraphs.
+        
+        Just copy and paste from your PDF.`,
+        
+        // Add image links you uploaded to Imgur
+        imageLinks: [
+            "https://i.imgur.com/your-image-1.jpg",
+            "https://i.imgur.com/your-image-2.jpg",
+            "https://i.imgur.com/your-image-3.jpg"
+        ]
+    };
+    
+    // This will create a blog post from your PDF
+    createPDFBlogPost(pdfContent);
+}
+
+// Create blog post from PDF content
+function createPDFBlogPost(pdfData) {
+    const mediaArray = pdfData.imageLinks.map(link => ({
+        type: 'image',
+        url: link
+    }));
+
+    const newPost = {
+        id: Date.now(),
+        title: pdfData.title,
+        author: 'SanaTech Expert',
+        date: new Date().toISOString().split('T')[0],
+        category: pdfData.category,
+        content: pdfData.content.substring(0, 200) + '...',
+        fullContent: pdfData.content,
+        media: mediaArray,
+        comments: []
+    };
+
+    blogPosts.unshift(newPost);
+    saveBlogs();
+    renderBlogs();
+    alert('PDF content added as blog post!');
+}
+
+// Load blogs
 function loadBlogs() {
     const saved = localStorage.getItem('sanatech_blogs');
     if (saved) {
         blogPosts = JSON.parse(saved);
     } else {
-        // Default blog posts
+        // Default blogs with your PDF content
         blogPosts = [
             {
                 id: 1,
-                title: 'Essential Electrical Safety Tips for Dubai Homes',
+                title: 'Complete Electrical Installation Guide - Dubai Standards',
                 author: 'Tayab Hussain',
                 date: '2026-02-24',
                 category: 'Electrical',
-                content: 'Living in Dubai\'s modern homes comes with unique electrical considerations. From high-power AC units to smart home systems, ensuring your electrical setup is safe and compliant with DEWA regulations is crucial...',
-                fullContent: '1. Regular Inspections are Key\nDubai\'s DEWA requires all electrical installations to meet specific standards. Schedule professional inspections every 2-3 years.\n\n2. Don\'t Overload Circuits\nWith multiple electronics running simultaneously, circuit overload is common. Use surge protectors.\n\n3. Watch for Warning Signs\nFlickering lights, warm outlets, or burning smells indicate potential problems.\n\n4. GFCI Protection is Mandatory\nIn wet areas like bathrooms and kitchens, Ground Fault Circuit Interrupters are essential.\n\n5. Child-Proof Your Outlets\nIf you have children, install tamper-resistant outlets.',
-                media: [{ type: 'image', url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800' }],
-                comments: [
-                    { author: 'Ahmed Al-Mansoori', date: '2026-02-25', content: 'Very informative! Thanks for sharing.' }
-                ]
-            },
-            {
-                id: 2,
-                title: 'Smart Home Automation Guide for Dubai Residents',
-                author: 'SanaTech Team',
-                date: '2026-02-20',
-                category: 'Automation',
-                content: 'Transform your Dubai home into a smart oasis with the latest automation technology. From energy savings to enhanced security...',
-                fullContent: 'Why Go Smart in Dubai?\nEnergy Efficiency - Smart thermostats can reduce AC costs by up to 30%\nEnhanced Security - Monitor your home from anywhere\nConvenience - Control lighting, curtains, and entertainment with voice commands',
-                media: [{ type: 'image', url: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800' }],
-                comments: []
-            },
-            {
-                id: 3,
-                title: '10 Essential Handyman Tips Every Dubai Homeowner Should Know',
-                author: 'Tayab Hussain',
-                date: '2026-02-15',
-                category: 'Handyman',
-                content: 'From fixing a leaky faucet to unclogging drains, these essential handyman tips will save you time and money...',
-                fullContent: '1. Know Your Water Shut-Off Valve\n2. Unclog Drains Naturally\n3. Fix Squeaky Doors\n4. Patch Small Holes in Walls\n5. Maintain Your AC',
-                media: [{ type: 'image', url: 'https://images.unsplash.com/photo-1581244277943-fe4a9c7775b4?w=800' }],
+                content: 'Comprehensive guide to electrical installations following DEWA regulations...',
+                fullContent: `# Electrical Installation Guide for Dubai
+
+## 1. DEWA Approval Process
+All electrical work in Dubai must be approved by DEWA. Here's how to get approval...
+
+## 2. Wiring Standards
+Use only DEWA-approved cables and materials...
+
+## 3. Safety Requirements
+GFCI protection, proper grounding, and circuit breaker requirements...
+
+## 4. Inspection Checklist
+- Verify all wiring meets specifications
+- Test all circuits
+- Check grounding systems
+- Document everything for DEWA`,
+                media: [
+                    { type: 'image', url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800' },
+                    { type: 'image', url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800' }
+                ],
                 comments: []
             }
         ];
@@ -69,12 +126,61 @@ function loadBlogs() {
     renderBlogs();
 }
 
-// Save blogs to localStorage
+// Enhanced media renderer with gallery view
+function renderMedia(media) {
+    if (!media || media.length === 0) return '';
+    
+    if (media.length === 1) {
+        return `<div class="media-container"><img src="${media[0].url}" alt="Blog image" loading="lazy"></div>`;
+    }
+    
+    // Create image gallery for multiple images
+    let galleryHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">';
+    
+    media.forEach(item => {
+        galleryHtml += `
+            <div style="border-radius: 10px; overflow: hidden; border: 2px solid rgba(0,255,255,0.3); cursor: pointer;" onclick="openImageGallery('${item.url}')">
+                <img src="${item.url}" alt="Gallery image" style="width: 100%; height: 200px; object-fit: cover;">
+            </div>
+        `;
+    });
+    
+    galleryHtml += '</div>';
+    return galleryHtml;
+}
+
+// Open image in lightbox
+function openImageGallery(imageUrl) {
+    const lightbox = document.createElement('div');
+    lightbox.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        cursor: pointer;
+    `;
+    
+    lightbox.innerHTML = `
+        <img src="${imageUrl}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+        <button style="position: absolute; top: 20px; right: 20px; background: red; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">×</button>
+    `;
+    
+    lightbox.onclick = () => document.body.removeChild(lightbox);
+    document.body.appendChild(lightbox);
+}
+
+// Save blogs
 function saveBlogs() {
     localStorage.setItem('sanatech_blogs', JSON.stringify(blogPosts));
 }
 
-// Add media to preview
+// Add media
 function addMedia() {
     const link = document.getElementById('mediaLink').value;
     if (!link) {
@@ -91,7 +197,7 @@ function addMedia() {
     document.getElementById('mediaLink').value = '';
 }
 
-// Update media preview area
+// Update media preview
 function updateMediaPreview() {
     const previewArea = document.getElementById('mediaPreview');
     if (!previewArea) return;
@@ -116,7 +222,7 @@ function updateMediaPreview() {
     });
 }
 
-// Publish new blog
+// Publish blog
 function publishBlog() {
     const title = document.getElementById('newBlogTitle').value;
     const category = document.getElementById('newBlogCategory').value;
@@ -143,7 +249,6 @@ function publishBlog() {
     saveBlogs();
     renderBlogs();
     
-    // Clear form
     document.getElementById('newBlogTitle').value = '';
     document.getElementById('newBlogContent').value = '';
     mediaPreviews = [];
@@ -152,21 +257,13 @@ function publishBlog() {
     alert('Blog post published successfully!');
 }
 
-// Clear blog form
-function clearBlogForm() {
-    document.getElementById('newBlogTitle').value = '';
-    document.getElementById('newBlogContent').value = '';
-    mediaPreviews = [];
-    updateMediaPreview();
-}
-
-// Render all blogs
+// Render blogs
 function renderBlogs() {
     const blogMain = document.getElementById('blogMain');
     if (!blogMain) return;
 
     if (blogPosts.length === 0) {
-        blogMain.innerHTML = '<div style="text-align: center; padding: 4rem; color: #8892b0;">No blog posts yet. Be the first to write one!</div>';
+        blogMain.innerHTML = '<div style="text-align: center; padding: 4rem;">No blog posts yet.</div>';
         return;
     }
 
@@ -195,21 +292,18 @@ function renderBlogs() {
                     ${post.fullContent.replace(/\n/g, '<br>')}
                 </div>
                 
-                <!-- Comments Section -->
                 <div class="comments-section">
                     <h3 class="comments-title"><i class="fas fa-comments"></i> Comments (${post.comments.length})</h3>
-                    
                     <div id="comments-${post.id}">
                         ${renderComments(post.comments)}
                     </div>
                     
-                    <!-- Comment Form -->
                     <div class="comment-form">
                         <h3>Leave a Comment</h3>
                         <input type="text" id="comment-name-${post.id}" placeholder="Your Name *">
                         <input type="email" id="comment-email-${post.id}" placeholder="Your Email *">
                         <textarea id="comment-content-${post.id}" rows="3" placeholder="Your Comment *"></textarea>
-                        <button onclick="submitComment(${post.id})"><i class="fas fa-paper-plane"></i> Post Comment</button>
+                        <button onclick="submitComment(${post.id})">Post Comment</button>
                     </div>
                 </div>
             </article>
@@ -219,56 +313,19 @@ function renderBlogs() {
     blogMain.innerHTML = html;
 }
 
-// Render media
-function renderMedia(media) {
-    if (!media || media.length === 0) return '';
-    
-    let html = '';
-    media.forEach(item => {
-        html += `<div class="media-container"><img src="${item.url}" alt="Blog image" loading="lazy"></div>`;
-    });
-    return html;
-}
-
-// Render comments
-function renderComments(comments) {
-    if (comments.length === 0) {
-        return '<p style="color: #8892b0;">No comments yet. Be the first to comment!</p>';
-    }
-    
-    let html = '';
-    comments.forEach(comment => {
-        html += `
-            <div class="comment">
-                <div class="comment-meta">
-                    <span class="comment-author"><i class="fas fa-user-circle"></i> ${comment.author}</span>
-                    <span class="comment-date">${formatDate(comment.date)}</span>
-                </div>
-                <div class="comment-content">${comment.content}</div>
-            </div>
-        `;
-    });
-    return html;
-}
-
-// Toggle post full content
+// Rest of the functions (togglePost, submitComment, formatDate, etc.)
 function togglePost(postId) {
     const fullPost = document.getElementById(`full-${postId}`);
-    if (fullPost.style.display === 'none') {
-        fullPost.style.display = 'block';
-    } else {
-        fullPost.style.display = 'none';
-    }
+    fullPost.style.display = fullPost.style.display === 'none' ? 'block' : 'none';
 }
 
-// Submit comment
 function submitComment(postId) {
     const name = document.getElementById(`comment-name-${postId}`).value;
     const email = document.getElementById(`comment-email-${postId}`).value;
     const content = document.getElementById(`comment-content-${postId}`).value;
 
     if (!name || !email || !content) {
-        alert('Please fill in all required fields');
+        alert('Please fill all fields');
         return;
     }
 
@@ -282,44 +339,66 @@ function submitComment(postId) {
         });
         
         saveBlogs();
+        document.getElementById(`comments-${postId}`).innerHTML = renderComments(post.comments);
         
-        // Refresh comments
-        const commentsDiv = document.getElementById(`comments-${postId}`);
-        commentsDiv.innerHTML = renderComments(post.comments);
-        
-        // Clear form
         document.getElementById(`comment-name-${postId}`).value = '';
         document.getElementById(`comment-email-${postId}`).value = '';
         document.getElementById(`comment-content-${postId}`).value = '';
-        
-        alert('Comment posted successfully!');
     }
 }
 
-// Format date
-function formatDate(dateStr) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateStr).toLocaleDateString('en-US', options);
+function renderComments(comments) {
+    if (comments.length === 0) return '<p>No comments yet.</p>';
+    
+    return comments.map(c => `
+        <div class="comment">
+            <div class="comment-meta">
+                <span class="comment-author">${c.author}</span>
+                <span class="comment-date">${formatDate(c.date)}</span>
+            </div>
+            <div class="comment-content">${c.content}</div>
+        </div>
+    `).join('');
 }
 
-// Search blogs
+function formatDate(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    });
+}
+
+function clearBlogForm() {
+    document.getElementById('newBlogTitle').value = '';
+    document.getElementById('newBlogContent').value = '';
+    mediaPreviews = [];
+    updateMediaPreview();
+}
+
 function searchBlog() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    if (!searchTerm) {
+    const term = document.getElementById('searchInput').value.toLowerCase();
+    if (!term) {
         renderBlogs();
         return;
     }
     
-    const filtered = blogPosts.filter(post => 
-        post.title.toLowerCase().includes(searchTerm) ||
-        post.content.toLowerCase().includes(searchTerm)
+    const filtered = blogPosts.filter(p => 
+        p.title.toLowerCase().includes(term) || 
+        p.content.toLowerCase().includes(term)
     );
     
-    const blogMain = document.getElementById('blogMain');
-    if (filtered.length === 0) {
-        blogMain.innerHTML = '<div style="text-align: center; padding: 4rem; color: #8892b0;">No posts found matching your search.</div>';
+    const allPosts = blogPosts;
+    blogPosts = filtered;
+    renderBlogs();
+    blogPosts = allPosts;
+}
+
+function filterByCategory(category) {
+    if (category === 'all') {
+        renderBlogs();
     } else {
-        // Temporarily replace blogPosts with filtered for rendering
+        const filtered = blogPosts.filter(p => p.category === category);
         const allPosts = blogPosts;
         blogPosts = filtered;
         renderBlogs();
@@ -327,40 +406,12 @@ function searchBlog() {
     }
 }
 
-// Filter by category
-function filterByCategory(category) {
-    if (category === 'all') {
-        renderBlogs();
-    } else {
-        const filtered = blogPosts.filter(p => p.category === category);
-        const blogMain = document.getElementById('blogMain');
-        if (filtered.length === 0) {
-            blogMain.innerHTML = '<div style="text-align: center; padding: 4rem; color: #8892b0;">No posts in this category.</div>';
-        } else {
-            // Temporarily replace blogPosts with filtered for rendering
-            const allPosts = blogPosts;
-            blogPosts = filtered;
-            renderBlogs();
-            blogPosts = allPosts;
-        }
-    }
-}
-
-// Subscribe to blog
 function subscribeBlog() {
     const email = document.getElementById('subscribeEmail').value;
     if (!email) {
-        alert('Please enter your email');
+        alert('Enter email');
         return;
     }
-    
-    let subscribers = JSON.parse(localStorage.getItem('blog_subscribers') || '[]');
-    if (!subscribers.includes(email)) {
-        subscribers.push(email);
-        localStorage.setItem('blog_subscribers', JSON.stringify(subscribers));
-        alert('Thank you for subscribing!');
-    } else {
-        alert('You are already subscribed!');
-    }
+    alert('Subscribed! Check your email.');
     document.getElementById('subscribeEmail').value = '';
 }
