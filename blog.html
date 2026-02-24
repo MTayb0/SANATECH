@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SanaTech Blog | Electrical & Automation Insights - Dubai</title>
+    <meta name="description" content="Expert blog about electrical work, home automation, handyman tips, and tile finishing in Dubai. Latest industry insights and DIY guides.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Blog Specific Styles */
+        .blog-hero {
+            height: 40vh;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="white" stroke-width="2"/><path d="M20 20 L80 20 L80 80 L20 80 Z" fill="none" stroke="white" stroke-width="2"/><circle cx="30" cy="30" r="3" fill="white"/><circle cx="70" cy="70" r="3" fill="white"/></svg>');
+            background-size: 50px;
+            opacity: 0.1;
+        }
+        
+        .blog-hero h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 0 0 20px rgba(0,255,255,0.5);
+            position: relative;
+        }
+        
+        .blog-hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        /* Blog Posts */
+        .blog-post {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+        
+        .blog-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+        }
+        
+        .blog-meta i {
+            margin-right: 5px;
+        }
+        
+        .blog-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, white, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .blog-content {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+        
+        .read-more:hover {
+            gap: 15px;
+            color: white;
+        }
+        
+        /* Sidebar */
+        .blog-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .sidebar-widget {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .widget-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--neon-blue);
+            display: inline-block;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 1rem;
+        }
+        
+        .category-list a {
+            color: var(--gray);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.3s ease;
+        }
+        
+        .category-list a:hover {
+            color: var(--neon-blue);
+        }
+        
+        .category-list span {
+            color: var(--neon-blue);
+        }
+        
+        .recent-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .recent-post:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .recent-post img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .recent-post-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .recent-post-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .recent-post-info a:hover {
+            color: var(--neon-blue);
+        }
+        
+        .recent-post-info .date {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--neon-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: var(--neon-blue);
+            color: var(--primary);
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .comments-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .comment {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .comment-author {
+            font-weight: 700;
+            color: var(--neon-blue);
+        }
+        
+        .comment-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .comment-content {
+            color: var(--light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .reply-btn {
+            background: none;
+            border: none;
+            color: var(--neon-blue);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Comment Form */
+        .comment-form {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .comment-form .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+        }
+        
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+        }
+        
+        .comment-form button {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comment-form button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .subscribe-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .subscribe-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subscribe-box input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .subscribe-box button {
+            width: 100%;
+            background: var(--neon-blue);
+            color: var(--primary);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .subscribe-box button:hover {
+            background: white;
+        }
+        
+        /* Comment Alert */
+        .comment-alert {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comment-alert.error {
+            background: rgba(244, 67, 54, 0.2);
+            border-color: #f44336;
+            color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="circuit-loader">
+                <div class="wire"></div>
+                <div class="node node1"></div>
+                <div class="node node2"></div>
+                <div class="node node3"></div>
+            </div>
+            <h2 class="loading-text">LOADING BLOG</h2>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <h1>Sana<span>Tech</span></h1>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="index.html#services" class="nav-link"><i class="fas fa-cogs"></i> Services</a>
+                <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+                <a href="blog.html" class="nav-link active"><i class="fas fa-blog"></i> Blog</a>
+                <a href="index.html#contact" class="nav-link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="tel:+971509304586" class="nav-cta">
+                    <i class="fas fa-phone-alt"></i> +971 50 930 4586
+                </a>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInUp">SanaTech <span>BLOG</span></h1>
+            <p class="animate__animated animate__fadeInUp">Expert insights, DIY guides & industry news from Dubai's top technical service providers</p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <div class="blog-container">
+        <div class="blog-layout">
+            <!-- Main Content -->
+            <div class="blog-main">
+                <!-- Blog Post 1 -->
+                <article class="blog-post" id="post1">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-user"></i> Tayab Hussain</span>
+                        <span><i class="fas fa-calendar"></i> February 24, 2026</span>
+                        <span><i class="fas fa-folder"></i> Electrical</span>
+                    </div>
+                    <h2 class="blog-title">Essential Electrical Safety Tips for Dubai Homes</h2>
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200" alt="Electrical Safety" class="blog-image">
+                    <div class="blog-content">
+                        <p>Living in Dubai's modern homes comes with unique electrical considerations. From high-power AC units to smart home systems, ensuring your electrical setup is safe and compliant with DEWA regulations is crucial...</p>
+                        <p>In this comprehensive guide, we'll cover the top 10 electrical safety tips every Dubai resident should know, including how to identify potential hazards, when to call a professional, and maintenance best practices for your home's electrical system.</p>
+                    </div>
+                    <a href="#" class="read-more" onclick="toggleFullPost(this); return false;">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    
+                    <!-- Full Post Content (Hidden Initially) -->
+                    <div class="full-post" style="display: none;">
+                        <h3>1. Regular Inspections are Key</h3>
+                        <p>Dubai's DEWA requires all electrical installations to meet specific standards. Schedule professional inspections every 2-3 years to ensure your wiring, circuit breakers, and outlets are functioning properly and safely.</p>
+                        
+                        <h3>2. Don't Overload Circuits</h3>
+                        <p>With multiple electronics running simultaneously, circuit overload is common. Use surge protectors and avoid plugging too many high-wattage appliances into the same outlet.</p>
+                        
+                        <h3>3. Watch for Warning Signs</h3>
+                        <p>Flickering lights, warm outlets, or burning smells indicate potential problems. If you notice any of these signs, contact a DEWA-approved electrician immediately.</p>
+                        
+                        <h3>4. GFCI Protection is Mandatory</h3>
+                        <p>In wet areas like bathrooms and kitchens, Ground Fault Circuit Interrupters (GFCIs) are essential. They cut power instantly if a ground fault occurs, preventing electric shock.</p>
+                        
+                        <h3>5. Child-Proof Your Outlets</h3>
+                        <p>If you have children, install tamper-resistant outlets or use safety caps to prevent accidents.</p>
+                        
+                        <p><strong>Remember:</strong> Always hire DEWA-certified professionals for any electrical work. At SanaTech, all our electricians are fully licensed and insured for your peace of mind.</p>
+                    </div>
+                    
+                    <!-- Comments Section for this Post -->
+                    <div class="comments-section" id="comments-post1">
+                        <h3 class="comments-title"><i class="fas fa-comments"></i> Comments (<span class="comment-count">3</span>)</h3>
+                        
+                        <!-- Comments Container -->
+                        <div class="comments-container">
+                            <!-- Existing Comments -->
+                            <div class="comment">
+                                <div class="comment-meta">
+                                    <span class="comment-author"><i class="fas fa-user-circle"></i> Ahmed Al-Mansoori</span>
+                                    <span class="comment-date">February 25, 2026</span>
+                                </div>
+                                <div class="comment-content">
+                                    Very informative! I didn't know about the GFCI requirement in bathrooms. Will definitely check my home this weekend.
+                                </div>
+                                <button class="reply-btn" onclick="showReplyForm(this)"><i class="fas fa-reply"></i> Reply</button>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-meta">
+                                    <span class="comment-author"><i class="fas fa-user-circle"></i> Sarah Johnson</span>
+                                    <span class="comment-date">February 26, 2026</span>
+                                </div>
+                                <div class="comment-content">
+                                    Do you offer free home electrical safety inspections? We're in Dubai Marina and would love to have our system checked.
+                                </div>
+                                <button class="reply-btn" onclick="showReplyForm(this)"><i class="fas fa-reply"></i> Reply</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Comment Form for this Post -->
+                        <div class="comment-form">
+                            <h3>Leave a Comment</h3>
+                            <form class="blog-comment-form" onsubmit="submitComment(event, 'post1')">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Your Name *" required>
+                                    <input type="email" placeholder="Your Email *" required>
+                                </div>
+              
